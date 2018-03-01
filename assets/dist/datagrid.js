@@ -155,6 +155,9 @@ document.addEventListener('change', function(e) {
       counter = document.querySelector('.datagrid-' + grid + ' .datagrid-selected-rows-count');
       if (checked_inputs.length) {
         select.disabled = false;
+        if ($(select).find('option').length === 2) { // CUSTOM
+          select.value = $(select).find('option:last').attr('value');
+        }
         total = document.querySelectorAll('input[data-check-all-' + grid + ']').length;
         if (counter) {
           counter.innerHTML = checked_inputs.length + '/' + total;
@@ -416,6 +419,7 @@ $.nette.ext('datagrid.url', {
           url = host + path;
         }
         url += window.location.hash;
+        $('.datagrid form').attr('action', url.replace(host, '')); // CUSTOM
         if (window.location.href !== url) {
           return window.history.pushState({
             path: url
