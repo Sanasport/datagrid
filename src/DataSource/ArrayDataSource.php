@@ -204,7 +204,7 @@ class ArrayDataSource implements IDataSource
 		$condition = $filter->getCondition();
 		$values = $condition[$filter->getColumn()];
 
-		return in_array($row[$filter->getColumn()], $values, true);
+		return in_array($row[$filter->getColumn()], $values);
 	}
 
 
