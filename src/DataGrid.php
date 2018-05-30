@@ -388,7 +388,11 @@ class DataGrid extends Nette\Application\UI\Control
 	 */
 	public function __construct(Nette\ComponentModel\IContainer $parent = null, $name = null)
 	{
-		parent::__construct($parent, $name);
+		parent::__construct();
+
+		if ($parent !== null) {
+			$parent->addComponent($this, $name);
+		}
 
 		$this->monitor('Nette\Application\UI\Presenter');
 
@@ -3018,7 +3022,7 @@ class DataGrid extends Nette\Application\UI\Control
 	/**
 	 * Items can have thair detail - toggled
 	 * @param mixed $detail callable|string|bool
-	 * @param bool|NULL $primary_where_column
+	 * @param string|null $primary_where_column
 	 * @return Column\ItemDetail
 	 */
 	public function setItemsDetail($detail = true, $primary_where_column = null)
